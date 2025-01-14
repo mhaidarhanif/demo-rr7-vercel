@@ -1,5 +1,6 @@
+import { usersTable } from "~/db/schema.server";
 import type { Route } from "./+types/home";
-import { prisma } from "~/lib/database.server";
+import { db } from "~/db/drizzle.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,10 +10,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const animals = await prisma.animal.findMany();
+  const users = await db.select().from(usersTable);
 
   return {
-    animals,
+    users,
     message: context.VALUE_FROM_VERCEL,
   };
 }
