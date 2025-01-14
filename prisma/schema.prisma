@@ -16,6 +16,7 @@ datasource db {
 model Animal {
   id String @id @default(cuid())
 
+  slug      String   @unique
   name      String
   species   String
   isAdopted Boolean  @default(false)

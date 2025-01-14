@@ -13,6 +13,9 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio"
   },
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "@react-router/express": "*",
