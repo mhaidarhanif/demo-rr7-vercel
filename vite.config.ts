@@ -6,7 +6,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ isSsrBuild, command }) => ({
   build: {
-    rollupOptions: isSsrBuild ? { input: "./server/app.ts" } : undefined,
+    rollupOptions: isSsrBuild
+      ? {
+          input: "./server/app.ts",
+        }
+      : undefined,
   },
   css: {
     postcss: {
@@ -17,7 +21,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     noExternal: command === "build" ? true : undefined,
   },
   plugins: [reactRouter(), tsconfigPaths()],
-  optimizeDeps: {
-    exclude: ["@prisma/client"],
-  },
+  // optimizeDeps: {
+  //   exclude: ["@prisma/client"],
+  // },
 }));
