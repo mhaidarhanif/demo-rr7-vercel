@@ -26,7 +26,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   },
   plugins: [
     {
-      name: "foo",
+      name: "prisma-fix",
       enforce: "post",
       config() {
         return {
@@ -36,6 +36,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
           ssr: {
             resolve: {
               conditions: [...defaultServerConditions],
+              externalConditions: [...defaultServerConditions],
             },
           },
         };
