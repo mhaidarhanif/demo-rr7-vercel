@@ -1,7 +1,11 @@
 import { reactRouter } from "@react-router/dev/vite";
 import autoprefixer from "autoprefixer";
 import tailwindcss from "tailwindcss";
-import { defineConfig } from "vite";
+import {
+  defineConfig,
+  defaultClientConditions,
+  defaultServerConditions,
+} from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ isSsrBuild, command }) => ({
@@ -20,8 +24,24 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   ssr: {
     noExternal: command === "build" ? true : undefined,
   },
-  plugins: [reactRouter(), tsconfigPaths()],
-  alias: {
-    "@prisma/client": "@prisma/client/index.js",
-  },
+  plugins: [
+    {
+      name: "foo",
+      enforce: "post",
+      config() {
+        return {
+          resolve: {
+            conditions: [...defaultClientConditions],
+          },
+          ssr: {
+            resolve: {
+              conditions: [...defaultServerConditions],
+            },
+          },
+        };
+      },
+    },
+    reactRouter(),
+    tsconfigPaths(),
+  ],
 }));
