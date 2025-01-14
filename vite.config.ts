@@ -17,4 +17,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     noExternal: command === "build" ? true : undefined,
   },
   plugins: [reactRouter(), tsconfigPaths()],
+  optimizeDeps: {
+    exclude: ["@prisma/client"],
+  },
 }));
