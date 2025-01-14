@@ -20,5 +20,25 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   ssr: {
     noExternal: command === "build" ? true : undefined,
   },
-  plugins: [reactRouter(), tsconfigPaths()],
+  plugins: [
+    {
+      name: "prisma:build",
+      apply: "build",
+      config() {
+        return {
+          define: {
+            __dirname: "import.meta.dirname",
+            __filename: "import.meta.filename",
+          },
+        };
+      },
+      transform(code, id) {
+        if (id.includes("@prisma/client-generated")) {
+          return code.replace('eval("__dirname")', "import.meta.dirname");
+        }
+      },
+    },
+    reactRouter(),
+    tsconfigPaths(),
+  ],
 }));
