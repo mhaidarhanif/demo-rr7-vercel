@@ -21,4 +21,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     noExternal: command === "build" ? true : undefined,
   },
   plugins: [reactRouter(), tsconfigPaths()],
+  alias: {
+    "@prisma/client": "@prisma/client/index.js",
+  },
 }));
