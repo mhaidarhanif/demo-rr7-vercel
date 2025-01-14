@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
-import { prisma } from "~/lib/database.server";
+import { prisma } from "~/lib/database";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,7 +21,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <pre>{JSON.stringify(loaderData, null, 2)}</pre>
-      {/* <Welcome message={loaderData.message} /> */}
     </div>
   );
 }
