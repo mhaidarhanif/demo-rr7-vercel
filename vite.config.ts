@@ -44,7 +44,4 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     reactRouter(),
     tsconfigPaths(),
   ],
-  optimizeDeps: {
-    exclude: ["@prisma/client"],
-  },
 }));
