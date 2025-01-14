@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import { prisma } from "~/lib/database";
+import { prisma } from "~/lib/database.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
