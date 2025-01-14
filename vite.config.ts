@@ -9,7 +9,6 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     rollupOptions: isSsrBuild
       ? {
           input: "./server/app.ts",
-          external: ["@prisma/client"],
         }
       : undefined,
   },
