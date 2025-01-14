@@ -1,17 +1,28 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
+import { prisma } from "~/lib/database.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
+    { title: "React Router v7 Demo Vercel" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({ context }: Route.LoaderArgs) {
-  return { message: context.VALUE_FROM_VERCEL };
+export async function loader({ context }: Route.LoaderArgs) {
+  const animals = await prisma.animal.findMany();
+
+  return {
+    animals,
+    message: context.VALUE_FROM_VERCEL,
+  };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  return <Welcome message={loaderData.message} />;
+  return (
+    <div>
+      <pre>{JSON.stringify(loaderData, null, 2)}</pre>
+      {/* <Welcome message={loaderData.message} /> */}
+    </div>
+  );
 }
