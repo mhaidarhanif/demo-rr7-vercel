@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development bun ./dev-server.js",
+    "b": "bun run build",
     "build": "react-router build && node vercel/prepare.js",
     "typecheck": "react-router typegen && tsc",
     "docker:up": "docker compose up -d",
